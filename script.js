@@ -1,3 +1,6 @@
+const API_KEY = "AIzaSyAr0RiT4gA2muZuZkj85eT-_cG6cUELaxU";  // Replace with your actual API key
+const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent";
+
 // Show Sections Based on Navigation Click
 function showSection(sectionId) {
     document.querySelectorAll('.content').forEach(section => {
@@ -9,9 +12,10 @@ function showSection(sectionId) {
 // Display Home Section by Default
 document.addEventListener("DOMContentLoaded", function () {
     showSection('home');
+    window.speechSynthesis.getVoices(); // Load voices early
 });
 
-// ✅ Motivational Quotes with Text-to-Speech
+// ✅ Motivational Quotes (Slider Feature Can Be Added)
 const quotes = [
     "Believe in yourself and all that you are!",
     "Every day is a second chance.",
@@ -22,15 +26,13 @@ const quotes = [
 
 function generateQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
-    const quoteText = quotes[randomIndex];
-    document.getElementById("quote").textContent = quoteText;
-    speakText(quoteText); // Speak the quote
+    document.getElementById("quote").textContent = quotes[randomIndex];
 }
 
-// ✅ Task Reminders with Delete Option
+// ✅ Task Reminders
 function addReminder() {
-    const reminderInput = document.getElementById("reminderInput").value.trim();
-    if (reminderInput === "") {
+    const reminderInput = document.getElementById("reminderInput").value;
+    if (reminderInput.trim() === "") {
         alert("Please enter a reminder!");
         return;
     }
@@ -43,25 +45,46 @@ function addReminder() {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "❌";
     deleteButton.style.marginLeft = "10px";
-    deleteButton.onclick = function() {
+    deleteButton.onclick = function () {
         reminderList.removeChild(li);
     };
 
     li.appendChild(deleteButton);
     reminderList.appendChild(li);
-    
+
     document.getElementById("reminderInput").value = ""; // Clear input field
 }
 
 // ✅ AI Chatbot Configuration
-const API_KEY = 'AIzaSyAr0RiT4gA2muZuZkj85eT-_cG6cUELaxU';  // ❗ Replace securely
-const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
-
 const chatMessages = document.getElementById('chat-messages');
 const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 
-// Function to Fetch AI Response
+// ✅ Text-to-Speech Function
+function speakText(text) {
+    if (!'speechSynthesis' in window) {
+        console.error("Speech Synthesis API is not supported in this browser.");
+        return;
+    }
+
+    window.speechSynthesis.cancel(); // Stop any ongoing speech
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = 'en-US';
+    speech.rate = 1;  // Adjust speed (1 is normal)
+    speech.pitch = 1; // Adjust pitch (1 is normal)
+    speech.volume = 1; // Volume control (0 to 1)
+
+    // Ensure voices are loaded before speaking
+    window.speechSynthesis.onvoiceschanged = function () {
+        console.log("Speech voices updated!");
+    };
+
+    setTimeout(() => {
+        window.speechSynthesis.speak(speech);
+    }, 300);
+}
+
+// ✅ Function to Fetch AI Response
 async function generateResponse(prompt) {
     try {
         const response = await fetch(`${API_URL}?key=${API_KEY}`, {
@@ -84,15 +107,12 @@ async function generateResponse(prompt) {
     }
 }
 
-// Function to Clean AI Response
+// ✅ Function to Remove Markdown from AI Response
 function cleanMarkdown(text) {
-    return text.replace(/#{1,6}\s?/g, '')
-               .replace(/[*_~]/g, '') // Removes markdown symbols
-               .replace(/\n{2,}/g, '\n') // Normalize line breaks
-               .trim();
+    return text.replace(/#{1,6}\s?/g, '').replace(/\\/g, '').replace(/\n{3,}/g, '\n\n').trim();
 }
 
-// Function to Add Messages to Chatbox
+// ✅ Function to Add Messages to Chatbox
 function addMessage(message, isUser) {
     const messageElement = document.createElement('div');
     messageElement.classList.add('message', isUser ? 'user-message' : 'bot-message');
@@ -100,7 +120,7 @@ function addMessage(message, isUser) {
     // Create Profile Image Element
     const profileImage = document.createElement('img');
     profileImage.classList.add('profile-image');
-    profileImage.src = isUser ? 'user.jpg' : 'bot.jpg'; // Replace with correct paths
+    profileImage.src = isUser ? 'user_image.jpg' : 'bot_image.jpg'; // Ensure these files exist in your project folder
     profileImage.alt = isUser ? 'User' : 'Bot';
 
     // Create Message Content
@@ -109,14 +129,24 @@ function addMessage(message, isUser) {
     messageContent.textContent = message;
 
     // Append Profile Image and Message Content
-    messageElement.appendChild(profileImage);
-    messageElement.appendChild(messageContent);
+    if (isUser) {
+        messageElement.appendChild(messageContent);
+        messageElement.appendChild(profileImage); // User image on the right
+    } else {
+        messageElement.appendChild(profileImage); // Bot image on the left
+        messageElement.appendChild(messageContent);
+    }
 
     chatMessages.appendChild(messageElement);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    // Speak Bot Message
+    if (!isUser) {
+        speakText(message);
+    }
 }
 
-// Function to Handle User Input in Chatbot
+// ✅ Function to Handle User Input in Chatbot
 async function handleUserInput() {
     const userMessage = userInput.value.trim();
     if (!userMessage) return;
@@ -128,9 +158,7 @@ async function handleUserInput() {
 
     try {
         const botMessage = await generateResponse(userMessage);
-        const cleanedMessage = cleanMarkdown(botMessage);
-        addMessage(cleanedMessage, false);
-        speakText(cleanedMessage); // Speak AI response
+        addMessage(cleanMarkdown(botMessage), false);
     } catch (error) {
         addMessage('Sorry, I encountered an error. Please try again.', false);
     } finally {
@@ -140,7 +168,7 @@ async function handleUserInput() {
     }
 }
 
-// ✅ Event Listeners for Chatbot
+// ✅ Event Listeners
 sendButton.addEventListener('click', handleUserInput);
 userInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -148,46 +176,3 @@ userInput.addEventListener('keypress', (e) => {
         handleUserInput();
     }
 });
-
-// ✅ TEXT-TO-SPEECH FUNCTION
-function speakText(text) {
-    if (!window.speechSynthesis) {
-        console.warn("Text-to-Speech is not supported in this browser.");
-        return;
-    }
-
-    let utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.9;  // Slower pace for a soothing voice
-    utterance.pitch = 1.1; // Slightly high pitch for a calm tone
-    utterance.volume = isMuted ? 0 : 1; // Control mute/unmute
-
-    // Select a female voice dynamically
-    let voices = speechSynthesis.getVoices();
-    utterance.voice = voices.find(voice => voice.name.includes("Female") || voice.name.includes("Google UK English Female")) || voices[0];
-
-    speechSynthesis.speak(utterance);
-}
-
-// ✅ MUTE/UNMUTE TOGGLE BUTTON
-let isMuted = false;
-function toggleMute() {
-    isMuted = !isMuted;
-    document.getElementById("mute-button").textContent = isMuted ? "Unmute" : "Mute";
-}
-
-// Add Mute/Unmute Button
-let muteButton = document.createElement("button");
-muteButton.id = "mute-button";
-muteButton.textContent = "Mute";
-muteButton.style.position = "fixed";
-muteButton.style.bottom = "20px";
-muteButton.style.right = "20px";
-muteButton.style.padding = "10px 20px";
-muteButton.style.borderRadius = "8px";
-muteButton.style.backgroundColor = "#58a6ff";
-muteButton.style.color = "white";
-muteButton.style.border = "none";
-muteButton.style.cursor = "pointer";
-muteButton.onclick = toggleMute;
-
-document.body.appendChild(muteButton);

@@ -1,220 +1,273 @@
-/* General Styling */
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@400;700&display=swap');
+
+/* ✅ General Styling */
 body {
-	font-family: 'Poppins', sans-serif;
-	margin: 0;
-	padding: 0;
-	background-color: #0d1117;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
-	color: #e0e0e0;
-	background-image: url('background.jpg');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
+    font-family: 'Poppins', sans-serif;  /* Modern & clean */
+    margin: 0;
+    padding: 0;
+    background-color: #0d1117;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #e0e0e0;
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-/* Navigation Bar */
+/* ✅ Static Navbar */
 nav {
-	background: #1e1e1e;
-	width: 100%;
-	padding: 15px;
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 1000;
+    width: 100%;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(80px);  /* Soft blur effect */
+    text-align: center;
 }
 
+/* ✅ Improved Navigation Links */
 nav ul {
-	list-style: none;
-	padding: 0;
-	text-align: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 nav ul li {
-	display: inline;
-	margin: 0 15px;
+    display: inline;
+    margin: 0 20px;
 }
 
 nav ul li a {
-	color: #58a6ff;
-	text-decoration: none;
-	font-size: 18px;
-	font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 15px;
+    transition: all 0.3s ease-in-out;
 }
 
 nav ul li a:hover {
-	color: #1f6feb;
+    color: #1f6feb;
+    text-shadow: 0px 0px 10px rgba(88, 166, 255, 0.6);
 }
 
-/* Content Sections */
+/* ✅ Remove Boxes Around Sections */
 .content {
-	display: none;
-	padding: 40px;
-	margin-top: 100px; /* Adjusted for navbar */
-	max-width: 80%;
+    display: none;
+    padding: 20px;
+    margin-top: 80px;
+    max-width: 80%;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
 }
 
-/* Buttons */
+/* ✅ Stylish Buttons */
 button {
-	background-color: #58a6ff;
-	border: none;
-	padding: 12px 24px;
-	color: white;
-	font-size: 16px;
-	cursor: pointer;
-	margin-top: 10px;
-	border-radius: 8px;
-	transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #58a6ff;
+    border: none;
+    padding: 12px 24px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
 button:hover {
-	background-color: #1f6feb;
-	transform: scale(1.05);
+    background-color: #1f6feb;
+    transform: scale(1.05);
 }
 
-/* Input Fields */
+/* ✅ Modern Input Fields */
 input {
-	padding: 12px;
-	width: 60%;
-	border: 1px solid #58a6ff;
-	border-radius: 5px;
-	margin-top: 10px;
-	background-color: #21262d;
-	color: #e0e0e0;
+    font-family: 'Poppins', sans-serif;
+    padding: 12px;
+    width: 60%;
+    border: 1px solid #58a6ff;
+    border-radius: 8px;
+    margin-top: 10px;
+    background-color: #21262d;
+    color: #e0e0e0;
+    transition: border 0.3s ease-in-out;
 }
 
-/* Chat Container */
+input:focus {
+    border-color: #1f6feb;
+    outline: none;
+}
+
+/* ✅ Reminders List */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    background: none;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ✅ Chat Container */
 .chat-container {
-	width: 100%;
-	max-width: 400px;
-	background: rgba(20, 22, 30, 0.95);
-	border-radius: 15px;
-	box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-	overflow: hidden;
-	display: flex;
-	flex-direction: column;
-	height: 500px;
-	margin-top: 30px;
+    width: 100%;
+    max-width: 400px;
+    background: rgba(20, 22, 30, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
 }
 
-/* Chat Header */
+/* ✅ Chat Header */
 .chat-header {
-	background-color: #161b22;
-	color: #58a6ff;
-	padding: 20px;
-	text-align: center;
-	font-weight: 600;
-	font-size: 1.5rem;
+    background-color: #161b22;
+    color: #58a6ff;
+    padding: 20px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
 }
 
-/* Chat Messages */
+/* ✅ Motivational Quote Box */
+.quote-container {
+    background: #21262d;
+    padding: 12px;
+    text-align: center;
+    font-style: italic;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    color: #c9d1d9;
+    border-left: 3px solid #58a6ff;
+}
+
+/* ✅ Chat Messages */
 .chat-messages {
-	flex-grow: 1;
-	padding: 15px;
-	overflow-y: auto;
-	display: flex;
-	flex-direction: column;
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
 }
 
-/* Bot Messages - Highlighting TTS Playback */
-.bot-message {
-	background-color: #21262d;
-	padding: 12px;
-	border-radius: 10px;
-	margin: 8px 0;
-	text-align: left;
-	color: #e0e0e0;
-	font-size: 1rem;
-	width: fit-content;
-	max-width: 80%;
-	align-self: flex-start;
-	box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+/* ✅ Chat Bubbles */
+.message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
-/* Chat Input Box */
+.message-content {
+    padding: 12px;
+    border-radius: 8px;
+    max-width: 75%;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ✅ User Message */
+.user-message {
+    flex-direction: row-reverse;
+}
+
+.user-message .message-content {
+    background-color: #58a6ff;
+    margin-right: 10px;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* ✅ Bot Message */
+.bot-message .message-content {
+    background-color: #21262d;
+    margin-left: 10px;
+    color: #c9d1d9;
+}
+
+/* ✅ Chat Input Box */
 .chat-input-container {
-	display: flex;
-	padding: 15px;
-	background-color: #161b22;
+    display: flex;
+    padding: 15px;
+    background-color: #161b22;
 }
 
 #user-input {
-	flex-grow: 1;
-	padding: 12px;
-	border: 1px solid #30363d;
-	border-radius: 8px;
-	font-size: 1rem;
-	background-color: #0d1117;
-	color: #e0e0e0;
-	outline: none;
+    font-family: 'Poppins', sans-serif;
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #0d1117;
+    color: #e0e0e0;
+    outline: none;
 }
 
-/* Send Button */
+/* ✅ Send Button */
 #send-button {
-	padding: 12px 20px;
-	background-color: #58a6ff;
-	color: #fff;
-	border: none;
-	border-radius: 8px;
-	margin-left: 10px;
-	cursor: pointer;
-	font-size: 1rem;
-	font-weight: 500;
-	transition: 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+    padding: 12px 20px;
+    background-color: #58a6ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 #send-button:hover {
-	background-color: #1f6feb;
+    background-color: #1f6feb;
+    transform: scale(1.05);
 }
 
-/* ✅ Mute/Unmute TTS Button */
-#mute-button {
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	padding: 12px 24px;
-	background-color: #ff6b6b;
-	color: white;
-	font-size: 16px;
-	border: none;
-	border-radius: 8px;
-	cursor: pointer;
-	transition: 0.3s ease;
+/* ✅ Profile Images */
+.profile-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
 }
 
-#mute-button:hover {
-	background-color: #ff4f4f;
-	transform: scale(1.05);
+/* ✅ Responsive Design */
+@media (max-width: 480px) {
+    .chat-container {
+        height: 100vh;
+        border-radius: 0;
+    }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-	.content {
-		 max-width: 90%;
-	}
-
-	.chat-container {
-		 max-width: 100%;
-		 height: 450px;
-	}
-}
-
-/* Custom Scrollbar */
+/* ✅ Custom Scrollbar */
 ::-webkit-scrollbar {
-	width: 8px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-	background: #0d1117;
+    background: #0d1117;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #30363d;
-	border-radius: 4px;
+    background: #30363d;
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #5a5a5a;
+    background: #5a5a5a;
 }
