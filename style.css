@@ -1,0 +1,220 @@
+/* General Styling */
+body {
+	font-family: 'Poppins', sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #0d1117;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	color: #e0e0e0;
+	background-image: url('background.jpg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/* Navigation Bar */
+nav {
+	background: #1e1e1e;
+	width: 100%;
+	padding: 15px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+}
+
+nav ul {
+	list-style: none;
+	padding: 0;
+	text-align: center;
+}
+
+nav ul li {
+	display: inline;
+	margin: 0 15px;
+}
+
+nav ul li a {
+	color: #58a6ff;
+	text-decoration: none;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+nav ul li a:hover {
+	color: #1f6feb;
+}
+
+/* Content Sections */
+.content {
+	display: none;
+	padding: 40px;
+	margin-top: 100px; /* Adjusted for navbar */
+	max-width: 80%;
+}
+
+/* Buttons */
+button {
+	background-color: #58a6ff;
+	border: none;
+	padding: 12px 24px;
+	color: white;
+	font-size: 16px;
+	cursor: pointer;
+	margin-top: 10px;
+	border-radius: 8px;
+	transition: all 0.3s ease;
+}
+
+button:hover {
+	background-color: #1f6feb;
+	transform: scale(1.05);
+}
+
+/* Input Fields */
+input {
+	padding: 12px;
+	width: 60%;
+	border: 1px solid #58a6ff;
+	border-radius: 5px;
+	margin-top: 10px;
+	background-color: #21262d;
+	color: #e0e0e0;
+}
+
+/* Chat Container */
+.chat-container {
+	width: 100%;
+	max-width: 400px;
+	background: rgba(20, 22, 30, 0.95);
+	border-radius: 15px;
+	box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	height: 500px;
+	margin-top: 30px;
+}
+
+/* Chat Header */
+.chat-header {
+	background-color: #161b22;
+	color: #58a6ff;
+	padding: 20px;
+	text-align: center;
+	font-weight: 600;
+	font-size: 1.5rem;
+}
+
+/* Chat Messages */
+.chat-messages {
+	flex-grow: 1;
+	padding: 15px;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Bot Messages - Highlighting TTS Playback */
+.bot-message {
+	background-color: #21262d;
+	padding: 12px;
+	border-radius: 10px;
+	margin: 8px 0;
+	text-align: left;
+	color: #e0e0e0;
+	font-size: 1rem;
+	width: fit-content;
+	max-width: 80%;
+	align-self: flex-start;
+	box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+/* Chat Input Box */
+.chat-input-container {
+	display: flex;
+	padding: 15px;
+	background-color: #161b22;
+}
+
+#user-input {
+	flex-grow: 1;
+	padding: 12px;
+	border: 1px solid #30363d;
+	border-radius: 8px;
+	font-size: 1rem;
+	background-color: #0d1117;
+	color: #e0e0e0;
+	outline: none;
+}
+
+/* Send Button */
+#send-button {
+	padding: 12px 20px;
+	background-color: #58a6ff;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	margin-left: 10px;
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: 500;
+	transition: 0.3s ease;
+}
+
+#send-button:hover {
+	background-color: #1f6feb;
+}
+
+/* ✅ Mute/Unmute TTS Button */
+#mute-button {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	padding: 12px 24px;
+	background-color: #ff6b6b;
+	color: white;
+	font-size: 16px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: 0.3s ease;
+}
+
+#mute-button:hover {
+	background-color: #ff4f4f;
+	transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.content {
+		 max-width: 90%;
+	}
+
+	.chat-container {
+		 max-width: 100%;
+		 height: 450px;
+	}
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #0d1117;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #30363d;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #5a5a5a;
+}

@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../devnovate"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "MindfulBot"
+	}
+}

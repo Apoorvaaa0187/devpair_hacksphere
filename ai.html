@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivational Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('quotes')">Motivational Quotes</a></li>
+            <li><a href="#" onclick="showSection('flappy-bird')">Flappy Bird</a></li>
+            <li><a href="#" onclick="showSection('reminders')">Reminders</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section (Now Includes Chatbot) -->
+    <section id="home" class="content">
+        <h1>Welcome to Motivational Hub</h1>
+        <p>Your daily dose of motivation, games, and productivity tools.</p>
+        
+        <!-- Chatbot Section (Now in Home) -->
+        <div class="chat-container">
+            <div class="chat-header">Chat with AI</div>
+            
+            <div class="quote-container">
+                "Believe in yourself. Every journey begins with a single step."
+            </div>
+
+            <div class="chat-messages" id="chat-messages"></div>
+            
+            <div class="chat-input-container">
+                <input type="text" id="user-input" placeholder="Type your message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Motivational Quotes Section -->
+    <section id="quotes" class="content">
+        <h1>Motivational Quotes</h1>
+        <p id="quote">Click the button to get a motivational quote!</p>
+        <button onclick="generateQuote()">Get Quote</button>
+    </section>
+
+    <!-- Flappy Bird Section -->
+    <section id="flappy-bird" class="content">
+        <h1>Flappy Bird</h1>
+        <iframe src="https://flappybird.io/" width="600" height="400"></iframe>
+    </section>
+
+    <!-- Reminders Section -->
+    <section id="reminders" class="content">
+        <h1>Task Reminders</h1>
+        <input type="text" id="reminderInput" placeholder="Enter your reminder...">
+        <button onclick="addReminder()">Add Reminder</button>
+        <ul id="reminderList"></ul>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
